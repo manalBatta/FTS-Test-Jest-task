@@ -68,4 +68,8 @@ describe("Calculator", () => {
   it("should handle floating-point precision", () => {
     expect(calc(0.1, "+", 0.2)).toBeCloseTo(0.3, 10);
   });
+  it("should ignore numbers greater than 1000", () => {
+    expect(calc(2, "+", 1001)).toBe(2);
+    expect(calc(1001, "*", 2)).toBe(0); // Ignored
+  });
 });

@@ -22,9 +22,9 @@ function calc(...args) {
       }
     }
     if (typeof args[i] === "number" && args[i] > 1000) {
-      i += 2; // Skip the number and the operator
-      continue;
+      args[i] = 0; //Skip the number
     }
+    console.log(args[i]);
     if (typeof args[i] === "number") {
       resultArray.push(args[i]);
     } else if (args[i] === "*" || args[i] === "/") {
@@ -52,6 +52,7 @@ function calc(...args) {
       resultArray.push(args[i]);
     }
     i++;
+    console.log(args[i]);
   }
 
   // Step 2: Process addition and subtraction
@@ -61,7 +62,7 @@ function calc(...args) {
   while (i < resultArray.length) {
     let operator = resultArray[i];
     let nextNumber = resultArray[i + 1];
-
+    console.log(nextNumber);
     if (typeof nextNumber !== "number") {
       throw new Error("Invalid input type");
     }
