@@ -51,4 +51,9 @@ describe("Calculator", () => {
   it("should throw an error for invalid input types", () => {
     expect(() => calc("2", "+", 3)).toThrow("Invalid input type");
   });
+
+  //Test case:No input passed
+  test("should throw an error for no input passed", () => {
+    expect(() => calc()).toThrow("No input passed");
+  });
 });

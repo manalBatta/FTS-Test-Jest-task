@@ -1,4 +1,7 @@
 function calc(...args) {
+  if (!args.length) {
+    throw new Error("No input passed");
+  }
   if (args.length < 3) {
     throw new Error("Insufficient arguments");
   }
