@@ -6,18 +6,21 @@ function calc(...args) {
   // Step 1: Process multiplication and division first
   let resultArray = [];
   let i = 0;
+  const validOperators = ["+", "-", "*", "/"];
 
   while (i < args.length) {
     if (typeof args[i] === "number" && args[i] > 1000) {
       i += 2; // Skip the number and the operator
       continue;
-    }
-    if (typeof args[i] !== "number" && resultArray.length == 0) {
+    } else if (typeof args[i] !== "number" && resultArray.length == 0) {
+      //handle the case where the first element is operator
       i++;
       continue;
     }
     if (typeof args[i] === "number") {
       resultArray.push(args[i]);
+    } else if (!validOperators.includes(args[i])) {
+      throw new Error("Invalid operator");
     } else if (args[i] === "*" || args[i] === "/") {
       let prevNumber = resultArray.pop();
       let nextNumber = args[i + 1];
