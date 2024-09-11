@@ -9,12 +9,12 @@ function calc(...args) {
   const validOperators = ["+", "-", "*", "/"];
 
   while (i < args.length) {
+    //if the even indecies are not numbers throw Invalid input type
+    if (!(i % 2 == 0 && typeof args[i] === "number" && !isNaN(args[i]))) {
+      throw new Error("Invalid input type");
+    }
     if (typeof args[i] === "number" && args[i] > 1000) {
       i += 2; // Skip the number and the operator
-      continue;
-    } else if (typeof args[i] !== "number" && resultArray.length == 0) {
-      //handle the case where the first element is operator
-      i++;
       continue;
     }
     if (typeof args[i] === "number") {
