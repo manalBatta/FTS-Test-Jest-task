@@ -16,6 +16,10 @@ function calc(...args) {
       if (typeof args[i] !== "number" || isNaN(args[i])) {
         throw new Error("Invalid input type");
       }
+    } else {
+      if (!validOperators.includes(args[i])) {
+        throw new Error("Invalid operator");
+      }
     }
     if (typeof args[i] === "number" && args[i] > 1000) {
       i += 2; // Skip the number and the operator
@@ -23,8 +27,6 @@ function calc(...args) {
     }
     if (typeof args[i] === "number") {
       resultArray.push(args[i]);
-    } else if (!validOperators.includes(args[i])) {
-      throw new Error("Invalid operator");
     } else if (args[i] === "*" || args[i] === "/") {
       let prevNumber = resultArray.pop();
       let nextNumber = args[i + 1];
@@ -74,5 +76,4 @@ function calc(...args) {
 
   return result;
 }
-
 module.exports = calc;

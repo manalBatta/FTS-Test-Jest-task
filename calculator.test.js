@@ -53,7 +53,19 @@ describe("Calculator", () => {
   });
 
   //Test case:No input passed
-  test("should throw an error for no input passed", () => {
+  it("should throw an error for no input passed", () => {
     expect(() => calc()).toThrow("No input passed");
+  });
+  //Test case: handle multiple operations with mixed operators correctly
+  test("should handle multiple operations with mixed operators correctly", () => {
+    expect(calc(2, "+", 3, "*", 4, "-", 1)).toBe(13);
+  });
+  //Test case:handle consecutive numbers correctly
+  it("should handle consecutive numbers correctly", () => {
+    expect(() => calc(2, 3, 4)).toThrow("Invalid operator");
+  });
+  //Test case : handle floating-point precision
+  it("should handle floating-point precision", () => {
+    expect(calc(0.1, "+", 0.2)).toBeCloseTo(0.3, 10);
   });
 });
