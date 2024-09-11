@@ -64,12 +64,20 @@ describe("Calculator", () => {
   it("should handle consecutive numbers correctly", () => {
     expect(() => calc(2, 3, 4)).toThrow("Invalid operator");
   });
+
   //Test case : handle floating-point precision
   it("should handle floating-point precision", () => {
     expect(calc(0.1, "+", 0.2)).toBeCloseTo(0.3, 10);
   });
+
+  //Test case: ignore numbers greater than 1000
   it("should ignore numbers greater than 1000", () => {
     expect(calc(2, "+", 1001)).toBe(2);
     expect(calc(1001, "*", 2)).toBe(0); // Ignored
+  });
+
+  //Test case:non-numeric arguments
+  it("should throw an error for non-numeric arguments", () => {
+    expect(() => calc(2, "+", "three")).toThrow("Invalid input type");
   });
 });
