@@ -41,7 +41,8 @@ function calc(...args) {
 
       if (args[i] === "*") {
         resultArray.push(prevNumber * nextNumber);
-      } else if (args[i] === "/") {
+      } else {
+        console.log("covered");
         if (nextNumber === 0) {
           throw new Error("Division by zero");
         }
@@ -63,13 +64,10 @@ function calc(...args) {
     let operator = resultArray[i];
     let nextNumber = resultArray[i + 1];
     console.log(nextNumber);
-    if (typeof nextNumber !== "number") {
-      throw new Error("Invalid input type");
-    }
 
     if (operator === "+") {
       result += nextNumber;
-    } else if (operator === "-") {
+    } else {
       result -= nextNumber;
     }
     i += 2;

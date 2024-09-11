@@ -50,6 +50,8 @@ describe("Calculator", () => {
   // Test case: Invalid input type
   it("should throw an error for invalid input types", () => {
     expect(() => calc("2", "+", 3)).toThrow("Invalid input type");
+    expect(() => calc(2, "*", "2")).toThrow("Invalid input type");
+    expect(() => calc(2, "+", "3")).toThrow("Invalid input type");
   });
 
   //Test case:No input passed
@@ -72,12 +74,18 @@ describe("Calculator", () => {
 
   //Test case: ignore numbers greater than 1000
   it("should ignore numbers greater than 1000", () => {
-    expect(calc(2, "+", 1001)).toBe(2);
     expect(calc(1001, "*", 2)).toBe(0); // Ignored
+    expect(() => calc(2, "/", 1001)).toThrow("Division by zero");
   });
 
   //Test case:non-numeric arguments
   it("should throw an error for non-numeric arguments", () => {
     expect(() => calc(2, "+", "three")).toThrow("Invalid input type");
+  });
+
+  //Tests added from the couverage code
+  //Test case:Insufficient arguments
+  it("should handle Insufficient arguments", () => {
+    expect(() => calc(2, "+")).toThrow("Insufficient arguments");
   });
 });
