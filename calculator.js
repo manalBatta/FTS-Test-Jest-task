@@ -13,21 +13,26 @@ function calc(...args) {
 
   while (i < args.length) {
     if (i % 2 === 0) {
+      // Check for invalid input type (non-numeric)
       if (typeof args[i] !== "number" || isNaN(args[i])) {
         throw new Error("Invalid input type");
       }
     } else {
+      // Check for invalid operators
       if (!validOperators.includes(args[i])) {
         throw new Error("Invalid operator");
       }
     }
+
     if (typeof args[i] === "number" && args[i] > 1000) {
-      args[i] = 0; //Skip the number
+      args[i] = 0; // Ignore numbers greater than 1000
     }
-    console.log(args[i]);
+
+    // If it's a number, push to resultArray
     if (typeof args[i] === "number") {
       resultArray.push(args[i]);
     } else if (args[i] === "*" || args[i] === "/") {
+      // Process multiplication and division immediately
       let prevNumber = resultArray.pop();
       let nextNumber = args[i + 1];
 
@@ -35,14 +40,13 @@ function calc(...args) {
         nextNumber = 0; // Ignore numbers > 1000
       }
 
-      if (typeof nextNumber !== "number") {
+      if (typeof nextNumber !== "number" || isNaN(nextNumber)) {
         throw new Error("Invalid input type");
       }
 
       if (args[i] === "*") {
         resultArray.push(prevNumber * nextNumber);
       } else {
-        console.log("covered");
         if (nextNumber === 0) {
           throw new Error("Division by zero");
         }
@@ -53,7 +57,6 @@ function calc(...args) {
       resultArray.push(args[i]);
     }
     i++;
-    console.log(args[i]);
   }
 
   // Step 2: Process addition and subtraction
@@ -63,7 +66,6 @@ function calc(...args) {
   while (i < resultArray.length) {
     let operator = resultArray[i];
     let nextNumber = resultArray[i + 1];
-    console.log(nextNumber);
 
     if (operator === "+") {
       result += nextNumber;
